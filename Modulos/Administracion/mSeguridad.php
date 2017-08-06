@@ -1,9 +1,8 @@
 <?php
-$id = @$_POST['txtIdentificacion'];
-$nom = @$_POST['txtNombre'];
-$ape1 = @$_POST['txtPrimerApellido'];
-$ape2 = @$_POST['txtSegundoApellido'];
-$FecNacimiento = @$_POST['dtpFechaNacimiento'];
+$id = @$_POST['txtId'];
+$idPersona = @$_POST['txtIdPersona'];
+$contrasena = @$_POST['txtContrasena'];
+$IdPermiso = @$_POST['txtIdPermiso'];
 
 $servername = "localhost";
 $username = "root";
@@ -14,38 +13,37 @@ $conn = new mysqli($servername, $username, $password, $db);
   $boton = @$_POST["boton"];
 switch ($boton) {
     case "Ingresar":
-        $consulta = "insert into persona (idpersona, nombre, apellido1, apellido2, fechaNacimiento) values ('$id','$nom','$ape1','$ape2','$FecNacimiento')";
+        $consulta = "insert into seguridad (contrasena, persona_idpersona, idpermisos) values ('$contrasena', '$idPersona', '$IdPermiso')";
         $respuesta = mysqli_query($conn, $consulta);
         if ($respuesta) {
             $registros = mysqli_affected_rows($conn);
         }
     break;
     case "Modificar":
-        $consulta = "update persona set nombre = '$nom' , apellido1 = '$ape1', apellido2 = '$ape2', fechaNacimiento = '$FecNacimiento' where idpersona = '$id'";
+        $consulta = "update seguridad set contrasena = '$contrasena', persona_idpersona = '$idPersona', idpermisos = '$IdPermiso' where idSeguridad = '$id'";
         $respuesta = mysqli_query($conn, $consulta);
         if ($respuesta) {
             $registros = mysqli_affected_rows($conn);
         }
     break;
     case "Eliminar":
-         $consulta = "delete from persona where idpersona = '".$id."'";
+         $consulta = "delete from seguridad where idSeguridad = '$id'";
         $respuesta = mysqli_query($conn, $consulta);
         if ($respuesta) {
             $registros = mysqli_affected_rows($conn);
         }
     break;
     case "Consultar":   
-        $consulta = "select idpersona, nombre, apellido1, apellido2, fechaNacimiento from persona where idpersona= '". $id ."'" ;
+        $consulta = "select idSeguridad, contrasena, persona_idpersona, idpermisos from seguridad where idSeguridad= '". $id ."'" ;
         $respuesta = mysqli_query($conn,$consulta);
         if ($respuesta) {                    
             $registros = mysqli_affected_rows($conn);
             if ($registros > 0) {
                 $datos = mysqli_fetch_array($respuesta);
-                $id = $datos['idpersona'];
-                $nom = $datos['nombre'];
-                $ape1 = $datos['apellido1'];
-                $ape2 = $datos['apellido2'];
-                $FecNacimiento = $datos['fechaNacimiento'];
+                $id = $datos['idSeguridad'];
+                $contrasena = $datos['contrasena'];
+                $persona_idpersona = $datos['persona_idpersona'];
+                $IdPermiso = $datos['idpermisos'];
             }else{
                 echo "error con registros";
             }
@@ -96,7 +94,7 @@ switch ($boton) {
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
-        mostrar(cityName);
+         mostrar(cityName);
     }
 
 function mostrar(e){
@@ -117,7 +115,6 @@ function mostrar(e){
     }
 }
 mostrar();
-
 
     function Procesar(){
                 var Resultado;
@@ -149,7 +146,7 @@ mostrar();
 
 <body>
 <div id="Header">
-    <p style="color: white; margin-left: 37%; font-size: 2em;  font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;">Mantenimiento de Personas</p>
+    <p style="color: white; margin-left: 37%; font-size: 2em;  font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;">Mantenimiento de Seguridad</p>
 </div>
 
 
@@ -169,49 +166,34 @@ mostrar();
                 <form class="form-signin" action="" method="POST">
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="hidden" name="metodo" value="SelectPersona"></input>
-                     <div class="row inner-wrapper-row">
+                      <div class="row inner-wrapper-row" style="margin-left: -1%;">
                         <div class="col-md-4"> 
-                            <label id="lblIdentificacion">Identificacion Persona:</label>
-                            <input type="text" id="txtIdentificacion" class="form-control" placeholder="Identificacion" name="txtIdentificacion" required autofocus>
+                            <label id="lblDescripcion2">Id Persona:</label>
+                            <input type="text" id="txtPermiso2" class="form-control" placeholder="Id Persona" name="txtIdPersona" value="<?php echo $idPersona ?>"  autofocus>
                         </div>
-                    </div>   
+                    </div> 
 
                     <div class="row inner-wrapper-row">
                         <div class="col-md-4"> 
-                            <label id="lblNombre">Nombre Persona:</label>
-                            <input type="text" id="txtNombre" class="form-control" placeholder="Nombre Persona" name="txtNombre" autofocus >
+                            <label id="lblDescripcion2">contraseña:</label>
+                            <input type="text" id="txtPermiso2" class="form-control" placeholder="contraseña" name="txtContrasena" value="<?php echo $contrasena ?>"  autofocus>
                         </div>
-                    </div>    
+                    </div> 
                     <div class="row inner-wrapper-row">
                         <div class="col-md-4"> 
-                            <label id="lblPrimerApellido">Primer Apellido:</label>
-                            <input type="text" id="txtPrimerApellido" class="form-control" placeholder="Primer Apellido" name="txtPrimerApellido"  autofocus >
+                            <label id="lblDescripcion2">Id Permiso:</label>
+                            <input type="text" id="txtPermiso2" class="form-control" placeholder="Id Permiso" name="txtIdPermiso" value="<?php echo $IdPermiso ?>"  autofocus>
                         </div>
-                    </div>
-                    
-                   <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblSegundoApellido">Segundo Apellido:</label>
-                            <input type="text" id="txtSegundoApellido" class="form-control" placeholder="Segundo Apellido" name="txtSegundoApellido"  autofocus ></br>
-                        </div>
-                    </div>
-                    <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblFechaNacimientos">Fecha Nacimiento:</label>
-                            <input type="date" id="dtpFechaNacimiento" class="date" value="" name="dtpFechaNacimiento"  autofocus>    
-                        </div></br></br>
-                    </div>
+                    </div> </br>    
 
                     <div class="row inner-wrapper-row">
                         <div class="col-md-2"> 
-                           <button class="btn btn-lg btn-primary" id="boton" name="boton" onclick="mostrar('Ingresar')" value="Ingresar" type="submit">Ingresar</button>
+                           <button class="btn btn-lg btn-primary" id="boton" name="boton" value="Ingresar" type="submit">Ingresar</button>
                         </div>
                         <div class="col-md-2"> 
-                           <button class="btn-lg btn-danger" id="boton" name="can" style="display: inline-block; float: left;" >Cancelar</button>
+                           <button class="btn-lg btn-danger" style="display: inline-block; float: left;" onclick=" Procesar()">Cancelar</button>
                         </div>
                     </div>
-
-                    </br>
                     
                 </form><!-- /form -->
             </div><!-- /card-container -->
@@ -220,7 +202,7 @@ mostrar();
     </div>
 
     <div id="Modificar" class="tabcontent">
-     <div class="container" style="margin-left: 37% ">
+        <div class="container" style="margin-left: 37% ">
 
             <div class="card card-container">
 
@@ -229,49 +211,45 @@ mostrar();
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="hidden" name="metodo" value="metAcceso"></input>
                     
-                    <div class=" inner-wrapper-row" style="margin-left: -1%;">
+                    <div class="inner-wrapper-row" style="margin-left: -1%;">
                         <div class="col-md-2"> 
-                            <label id="lblIdentificacion2">Identificacion Persona:</label>
-                            <input type="text" id="txtIdentificacion2" class="form-control" style="width: 80%;" placeholder="Identificacion" name="txtIdentificacion" required autofocus value="<?php echo $id ?>">
+                            <label id="lblId">Id:</label>
+                            <input type="text" id="txtId" class="form-control" placeholder="Id" name="txtId" value="<?php echo $id ?>" required autofocus>
                         </div>
                     </div> 
+
                     <div class="row inner-wrapper-row">
                         <div class="col-md-2"> 
                              <button class="btn btn-lg btn-primary" onclick="mostrar('Modificar')" type="submit" id="boton" name="boton" value="Consultar" style="width: 80%; display: inline-block;  margin-top: 10%; margin-left: 20%;">Consultar</button>
                         </div>
                     </div> 
-                    <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblNombre2">Nombre Persona:</label>
-                            <input type="text" id="txtNombre2" class="form-control" placeholder="Nombre Persona" name="txtNombre" value="<?php echo $nom ?>"  autofocus>
-                        </div>
-                    </div>    
-                    <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblPrimerApellido2">Primer Apellido:</label>
-                            <input type="text" id="txtPrimerApellido2" class="form-control" placeholder="Primer Apellido" name="txtPrimerApellido" autofocus value="<?php echo $ape1 ?>">
-                        </div>
-                    </div>
-                    
-                   <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblSegundoApellido2">Segundo Apellido:</label>
-                            <input type="text" id="txtSegundoApellido2" class="form-control" placeholder="Segundo Apellido" name="txtSegundoApellido" autofocus value="<?php echo $ape2 ?>"></br>
-                        </div>
-                    </div>
-                    <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblFechaNacimientos2">Fecha Nacimiento:</label>
-                            <input type="date" id="dtpFechaNacimiento2" class="date"  name="dtpFechaNacimiento"  autofocus value="<?php echo $FecNacimiento ?>">    
-                        </div></br></br>  
-                    </div>
 
                     <div class="row inner-wrapper-row">
+                        <div class="col-md-4"> 
+                            <label id="lblDescripcion2">Id Persona:</label>
+                            <input type="text" id="txtIdPersona2" class="form-control" placeholder="Id Persona" name="txtIdPersona" value="<?php echo $idPersona ?>"  autofocus>
+                        </div>
+                    </div> 
+
+                    <div class="row inner-wrapper-row">
+                        <div class="col-md-4"> 
+                            <label id="lblDescripcion2">contraseña:</label>
+                            <input type="text" id="txtContrasena2" class="form-control" placeholder="contraseña" name="txtContrasena" value="<?php echo $contrasena ?>"  autofocus>
+                        </div>
+                    </div> 
+                    <div class="row inner-wrapper-row">
+                        <div class="col-md-4"> 
+                            <label id="lblDescripcion2">Id Permiso:</label>
+                            <input type="text" id="txtIdPermiso2" class="form-control" placeholder="Id Permiso" name="txtIdPermiso" value="<?php echo $IdPermiso ?>"  autofocus>
+                        </div>
+                    </div> </br>     
+                   
+                    <div class="row inner-wrapper-row">
                         <div class="col-md-2"> 
-                           <button class="btn btn-lg btn-primary" id="boton" name="boton" value="Modificar" onclick="mostrar('Modificar')" type="submit">Modificar</button>
+                           <button class="btn btn-lg btn-primary" id="boton" name="boton" value="Modificar" type="submit">Modificar</button>
                         </div>
                         <div class="col-md-2"> 
-                           <button class="btn-lg btn-danger" id="boton" name="boton" style="display: inline-block; float: left; margin-left:35%; ">Cancelar</button>
+                           <button class="btn-lg btn-danger" style="display: inline-block; float: left;">Cancelar</button>
                         </div>
                     </div>
 
@@ -283,7 +261,7 @@ mostrar();
     </div>
 
     <div id="Eliminar" class="tabcontent">
-      <div class="container" style="margin-left: 37% ">
+        <div class="container" style="margin-left: 37% ">
 
             <div class="card card-container">
 
@@ -292,50 +270,45 @@ mostrar();
                     <span id="reauth-email" class="reauth-email"></span>
                     <input type="hidden" name="metodo" value="metAcceso"></input>
                     
-                    <div class="inner-wrapper-row" style="margin-left: -1%;">
+                   <div class="inner-wrapper-row" style="margin-left: -1%;">
                         <div class="col-md-2"> 
-                            <label id="lblIdentificacion3">Identificacion Persona:</label>
-                            <input type="text" id="txtIdentificacion3" class="form-control" placeholder="Identificacion" name="txtIdentificacion" required autofocus value="<?php echo $id ?>">
+                            <label id="lblId">Id:</label>
+                            <input type="text" id="txtId3" class="form-control" placeholder="Id" name="txtId" value="<?php echo $id ?>" required autofocus>
                         </div>
                     </div> 
+
                     <div class="row inner-wrapper-row">
                         <div class="col-md-2"> 
-                             <button class="btn btn-lg btn-primary" type="submit" id="boton" name="boton" style="width: 80%; display: inline-block;  margin-top: 10%; margin-left: 20%;" onclick="mostrar('Eliminar')">Consultar Id</button>
+                             <button class="btn btn-lg btn-primary" onclick="mostrar('Modificar')" type="submit" id="boton" name="boton" value="Consultar" style="width: 80%; display: inline-block;  margin-top: 10%; margin-left: 20%;">Consultar</button>
                         </div>
                     </div> 
 
                     <div class="row inner-wrapper-row">
                         <div class="col-md-4"> 
-                            <label id="lblNombre3">Nombre Persona:</label>
-                            <input type="text" id="txtNombre3" class="form-control" placeholder="Nombre Persona" name="txtNombre"  autofocus value="<?php echo $nom ?>">
+                            <label id="lblDescripcion2">Id Persona:</label>
+                            <input type="text" id="txtIdPersona3" class="form-control" placeholder="Id Persona" name="txtIdPersona" value="<?php echo $idPersona ?>"  autofocus>
                         </div>
-                    </div>    
+                    </div> 
+
                     <div class="row inner-wrapper-row">
                         <div class="col-md-4"> 
-                            <label id="lblPrimerApellido3">Primer Apellido:</label>
-                            <input type="text" id="txtPrimerApellido3" class="form-control" placeholder="Primer Apellido" name="txtPrimerApellido"  autofocus value="<?php echo $ape1 ?>">
+                            <label id="lblDescripcion2">contraseña:</label>
+                            <input type="text" id="txtContrasena3" class="form-control" placeholder="contraseña" name="txtContrasena" value="<?php echo $contrasena?>"  autofocus>
                         </div>
-                    </div>
+                    </div> 
+                    <div class="row inner-wrapper-row">
+                        <div class="col-md-4"> 
+                            <label id="lblDescripcion2">Id Permiso:</label>
+                            <input type="text" id="txtIdPermiso3" class="form-control" placeholder="Id Permiso" name="txtIdPermiso" value="<?php echo $IdPermiso ?>"  autofocus>
+                        </div>
+                    </div> </br>    
                     
-                   <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblSegundoApellido3">Segundo Apellido:</label>
-                            <input type="text" id="txtSegundoApellido3" class="form-control" placeholder="Segundo Apellido" name="txtSegundoApellido"  autofocus value="<?php echo $ape2 ?>"></br>
-                        </div>
-                    </div>
-                    <div class="row inner-wrapper-row">
-                        <div class="col-md-4"> 
-                            <label id="lblFechaNacimientos3">Fecha Nacimiento:</label>
-                            <input type="date" id="dtpFechaNacimiento3" class="date" value="" name="dtpFechaNacimiento"  autofocus value="<?php echo $FecNacimiento ?>">    
-                        </div></br></br>
-                    </div>
-
                     <div class="row inner-wrapper-row">
                         <div class="col-md-2"> 
-                           <button class="btn btn-lg btn-primary" id="boton" name="boton" value="Eliminar" onclick="mostrar('Eliminar')" type="submit">Eliminar</button>
+                           <button class="btn btn-lg btn-primary" id="boton" name="boton" type="submit" value="Eliminar">Eliminar</button>
                         </div>
                         <div class="col-md-2"> 
-                           <button class="btn-lg btn-danger" style="display: inline-block; float: left; margin-left:35%;">Cancelar</button>
+                           <button class="btn-lg btn-danger" style="display: inline-block; float: left;">Cancelar</button>
                         </div>
                     </div>
 
@@ -345,9 +318,6 @@ mostrar();
             </div><!-- /card-container -->
         </div><!-- /container -->
     </div>
-
-
-
 </body>
 
 
