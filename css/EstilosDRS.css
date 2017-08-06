@@ -6,7 +6,6 @@
 
 div.tab {
     overflow: hidden;
-    border: 1px solid #1f187c;
     background-color: #1f187c;
 }
 
@@ -35,8 +34,7 @@ div.tab button.active {
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #070254;
-    border-top: none;
+
 }
 
 .tabcontent {
@@ -54,30 +52,6 @@ div.tab button.active {
     to {opacity: 1;}
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #060733;
-
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #010011;
-}
 
 #Header{
     width: 100%;
