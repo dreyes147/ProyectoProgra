@@ -219,7 +219,7 @@ mysqli_close($link);
     <script type="text/javascript" src="./js/jquery3.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" type="prototipo/css" href="EstilosDBL.css">
+    <link rel="stylesheet" type="text/css" href="./css/EstilosDBL.css">
     <script>
         
 function openCity(evt, cityName) {
@@ -309,7 +309,10 @@ div.tab button.active {
 
 <body>
 
-<a>Proyectos</a>
+<div id="Header">
+    <p style="color: white; margin-left: 37%; font-size: 2em;  font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;">Mantenimiento de Proyectos</p>
+</div>
+
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Ingresar')">Ingresar</button>
   <button class="tablinks" onclick="openCity(event, 'Modificar')">Modificar</button>
