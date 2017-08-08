@@ -385,7 +385,7 @@ div.tab button.active {
                 ?>
                 </div>
                 </br>
-                <button type ="submit" name="btnInsertar" value="send to database"> Guardar datos </button>
+                <button type ="submit" name="btnInsertar" value="send to database" style="display: inline-block; float: left;"> Guardar datos </button>
        </form>
     </div><!-- /container -->
 
@@ -445,7 +445,7 @@ div.tab button.active {
                 <?php
                 ?>
                 </br>
-                <input class="btn btn-lg btn-primary btn-block btn-signin" name="buscarMod" type="submit" value="Buscar">
+                <input class="btn btn-lg btn-primary btn-block btn-signin" name="buscarMod" type="submit" value="Buscar" style="display: inline-block; float: left;">
                 </div>
 
                 </br>
@@ -508,7 +508,7 @@ div.tab button.active {
                 </br>
 
 
-                <button class="btn btn-lg btn-primary btn-block btn-signin" name="modificar" type="submit">Modificar datos</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" name="modificar" type="submit" style="display: inline-block; float: left;">Modificar datos</button>
 
         </div><!-- /card-container -->
     </div><!-- /container -->
@@ -569,7 +569,7 @@ div.tab button.active {
                 <?php
                 ?>
                 </br>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" name="buscarEli" type="submit"> Eliminar datos</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" name="buscarEli" type="submit" style="display: inline-block; float: left;">Buscar</button>
                 </div>
 
                 </br>
@@ -632,7 +632,7 @@ div.tab button.active {
                 </br>
 
 
-                <button class="btn btn-lg btn-primary btn-block btn-signin" name="eliminar" type="submit">Eliminar datos</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" name="eliminar" type="submit"  style="display: inline-block; float: left;">Eliminar datos</button>
 
         </div><!-- /card-container -->
     </div><!-- /container -->
