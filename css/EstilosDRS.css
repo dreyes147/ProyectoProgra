@@ -1,0 +1,92 @@
+/* Style the tab */
+
+*{
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+div.tab {
+    overflow: hidden;
+    border: 1px solid #1f187c;
+    background-color: #1f187c;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: #1f187c;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #070254;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #070254;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #070254;
+    border-top: none;
+}
+
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #060733;
+
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #010011;
+}
+
+#Header{
+    width: 100%;
+    background-color: #030116;
+    height: 80px;
+    padding-top: 2%;
+}
+
+
+
+
+
